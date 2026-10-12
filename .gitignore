@@ -1,0 +1,32 @@
+# Source data is prepared locally; retain only reviewed field descriptions.
+/Fama-French五因子模型/project/data/raw/*
+!/Fama-French五因子模型/project/data/raw/FS_Combas\[DES\]\[csv\].txt
+!/Fama-French五因子模型/project/data/raw/FS_Combas\[Matlab\].txt
+!/Fama-French五因子模型/project/data/raw/FS_Comins\[DES\]\[csv\].txt
+!/Fama-French五因子模型/project/data/raw/FS_Comins\[Matlab\].txt
+!/Fama-French五因子模型/project/data/raw/TRD_Cnmont\[DES\]\[csv\].txt
+!/Fama-French五因子模型/project/data/raw/TRD_Cnmont\[Matlab\].txt
+!/Fama-French五因子模型/project/data/raw/TRD_Mnth\[DES\]\[csv\].txt
+!/Fama-French五因子模型/project/data/raw/TRD_Mnth\[Matlab\].txt
+!/Fama-French五因子模型/project/data/raw/TRD_Nrrate\[DES\]\[csv\].txt
+!/Fama-French五因子模型/project/data/raw/TRD_Nrrate\[Matlab\].txt
+!/Fama-French五因子模型/project/data/raw/数据说明.txt
+
+# Original course data packages remain local.
+/Fama-French五因子模型/行为金融学2025_作业资料/data/*
+!/Fama-French五因子模型/行为金融学2025_作业资料/data/数据说明.txt
+
+# Regenerated intermediate data.
+/Fama-French五因子模型/project/data/processed/
+
+# Monthly series are local; public tables contain cross-sample summaries.
+/Fama-French五因子模型/project/output/tables/factors_monthly*.csv
+/Fama-French五因子模型/project/output/tables/momentum_factor.csv
+/Fama-French五因子模型/project/output/tables/test_portfolios_25.csv
+/Fama-French五因子模型/project/output/tables/factor_rolling_mean.csv
+/Fama-French五因子模型/project/output/tables/factor_rolling_vol.csv
+
+# Local Python environment and bytecode.
+/Fama-French五因子模型/project/.venv/
+__pycache__/
+*.py[cod]

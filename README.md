@@ -4,6 +4,8 @@
 
 原始资料覆盖 **2010 年 1 月至 2024 年 12 月**；现有报告与主要因子结果采用 **2012 年 7 月至 2024 年 12 月，共 150 个月**的样本。研究内容是因子构建与样本内资产定价检验。
 
+公开版本保留代码、字段说明、报告、跨样本统计汇总和图表；原始 CSV、原始数据压缩包、处理后 Parquet，以及逐月因子、组合收益和滚动统计 CSV 不纳入 Git。复现时需要自行准备数据。
+
 ## 阅读入口
 
 | 内容 | 入口 |
@@ -55,12 +57,12 @@ Fama-French五因子模型/
 │   │   ├── analysis/             # 回归、诊断和绘图
 │   │   ├── utils/                # 数据读写、日志和加载
 │   │   └── paths.py              # 路径及市场参数
-│   ├── data/raw/                 # 原始 CSV 与字段说明
-│   ├── data/processed/           # 已保存的 Parquet 中间数据
-│   ├── output/tables/            # 已保存的 CSV 结果
+│   ├── data/raw/                 # 字段说明；原始 CSV 自行准备
+│   ├── data/processed/           # 本地生成的 Parquet，不纳入 Git
+│   ├── output/tables/            # 跨样本统计汇总和回归结果
 │   ├── output/figures/           # PNG 与 HTML 图表
 │   └── docs/                     # 计划、进度和文献对齐记录
-└── 行为金融学2025_作业资料/       # 课程说明、原始压缩包与参考文献
+└── 行为金融学2025_作业资料/       # 课程说明与参考文献；原始数据包不纳入 Git
 ```
 
 `docs/PLAN.md`、`docs/STRUCTURE.md` 保留了早期规划，部分文件名称已与当前实现不同；运行时以 `src/` 中实际存在的模块为准。
@@ -71,7 +73,7 @@ Fama-French五因子模型/
 
 使用能够安装 [requirements.txt](Fama-French五因子模型/project/requirements.txt) 中依赖的 Python 环境。项目使用 pandas、NumPy、PyArrow、statsmodels、Matplotlib、Seaborn、scikit-learn 和 Plotly；GRS 脚本还直接使用 SciPy。仓库未锁定完整依赖版本。
 
-完整重建需要 `project/data/raw/` 中的以下 CSV，字段和单位应符合数据说明：
+完整重建前，请自行准备数据，并将以下 CSV 放入 `project/data/raw/`，字段和单位应符合数据说明。这些 CSV 不随公开仓库提供：
 
 | 文件 | 内容 |
 | --- | --- |
@@ -106,7 +108,7 @@ python -m factors.compute_momentum
 python -m tests_assets.build_25portfolios
 ```
 
-`compute_factors --scheme 2x3` 同时生成带方案名称的文件与兼容文件 `factors_monthly.parquet`。仓库已有 `factors_monthly_2x3.parquet`，但没有提交该兼容文件；描述统计、GRS 及部分绘图脚本依赖兼容文件，运行这些脚本前需要先执行上述因子生成步骤。
+`compute_factors --scheme 2x3` 同时生成带方案名称的文件与兼容文件 `factors_monthly.parquet`。这些 Parquet 和对应的月度因子 CSV 仅保存在本地；描述统计、GRS 及部分绘图脚本依赖兼容文件，运行这些脚本前需要先执行上述因子生成步骤。
 
 ### 回归、检验与绘图
 
@@ -127,5 +129,7 @@ python -m analysis.plot_predicted_vs_actual
 ## 数据与使用范围
 
 课程资料注明数据来源为 CSMAR，原始压缩包文件名带有“仅供南京大学使用”。复现前应自行确认所使用数据的访问与使用权限，仓库公开不代表第三方数据已获公开再分发授权。仓库当前也没有提供 LICENSE 文件。
+
+`.gitignore` 仅允许原始数据目录中的指定字段说明文件纳入 Git，并排除了课程原始数据包、全部处理中间文件，以及逐月因子、组合收益和滚动统计 CSV。重跑生成的数据保存在本地；公开版本中的汇总表和图表用于展示原研究结果。
 
 参考资料及其书目信息见 [REPORT.md](Fama-French五因子模型/project/REPORT.md) 和 [课程参考资料目录](Fama-French五因子模型/行为金融学2025_作业资料/reference/)。
